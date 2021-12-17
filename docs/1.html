@@ -9,6 +9,7 @@
 <link rel="shortcut icon" href="https://ftm.guru/img/64.png"/>
 <style>
 
+
 body {
   background:#17082f;
   color: white;
@@ -51,23 +52,8 @@ button:hover{
   font-size: 1.1em;
   transition: 0.25s;
 }
-button:after {
-  content: "";
-  background: #f1f1f1;
-  display: block;
-  position: absolute;
-  padding-top: 300%;
-  padding-left: 350%;
-  margin-left: -20px !important;
-  margin-top: -120%;
-  opacity: 0;
-  transition: all 0.8s
-}
-button:active:after {
-  padding: 0;
-  margin: 0;
-  opacity: 1;
-  transition: 0s
+button:active {
+  transform: translate(0px,10px);
 }
 .lowerbar{
   font-size: 1.25em;
@@ -101,16 +87,15 @@ button:active:after {
   transition: 0.25s;
   background: rgba(16,240,80,0.1);
 }
+.card span{font-size: 2em}
 .ki img {
   position: relative;
-  right:0;
-  top:24px;
-  left: 8px;
+  top:8px;
   border-radius: 50%;
   width: 48px;
   box-shadow: 0 0 2px 2px rgba(16,240,80,1);
 }
-.ki img:first-child{left: 16px}
+.ki img:first-child{left: 8px}
 .panels{
   display: grid;
   grid-template-columns: auto;
@@ -149,9 +134,9 @@ button:active:after {
   margin: 0 15px 15px 0;
   border:4px dashed #ffc107;
   border-right: none;
-
+  }
 }
-}
+.fore{color: gold !important;font-weight:400}
 
 </style>
 </head>
@@ -167,8 +152,12 @@ button:active:after {
 </div>
 <div class="body">
 <br>
-<h1>Kompound</h1>
-<h3>Compounding Service for KCC's Yield Farms</h3>
+<h1>
+	<span class="ki"><img src="img/kcs.svg"><img src="img/usdc.svg"></span>
+	KP1001
+</h1>
+<h2>Kompound Protocol</h2>
+<h3 class="fore">Compounding Service for KCC's Yield Farms</h3>
 <i>Earn 1% of each harvest, just for paying the gas! Earn compound interest even on your reimbursements!</i>
 <br><br>
 Zero deposit fees & Zero withdrawal fees.
@@ -176,11 +165,54 @@ Zero deposit fees & Zero withdrawal fees.
 
 <br><br><br><br><br>
 
-
-
 <h2>MojitoSwap Bar</h2>
-<h3>USDC-wKCS LP Token Maximizer</h3>
-This strategy takes in Mojito LP of USDC+KCS as deposits. It stakes them at the MojitoSwap Bar to earn MJT tokens. When at work, it harvests all pending MJT from the Bar. Next, it claims all the accrued MJT from the "Shaker" transaction mining smart contract. It then sells 50% of its MJT token balance for USDC. Then it sells remaining MJT into KCS. Next, it adds liquidity to the KCS+USDC pair at mojitoswap. Finally, it stakes the LP tokens obtained once again into the Bar.
+<h3 class="fore">USDC-wKCS LP Token Maximizer</h3>
+This strategy takes in Mojito LP of USDC+KCS as collateral deposits for issuing the KP1001 tokens to investors. It stakes the collateral obtained at the MojitoSwap Bar to earn MJT tokens. When at work, it harvests all pending MJT from the Bar. Next, it claims all the accrued MJT from the "Shaker" transaction mining smart contract. It then sells 50% of its MJT token balance for USDC. Then it sells remaining MJT into Wrapped KCS. Next, it adds liquidity to the KCS+USDC pair at mojitoswap. Finally, it stakes the LP tokens obtained once again into the Bar.
+
+<br><br>
+
+
+<div class="cards">
+
+	<div class="card" onclick="window.location=''">
+		<br>
+		<span>0.000 %</span>
+		<hr>
+		Average A.P.Y.
+	</div>
+	<div class="card" onclick="window.location=''">
+		<br>
+		<span>$ 0.000</span>
+		<hr>
+		Market Cap (TVL)
+	</div>
+	<div class="card" onclick="window.location=''">
+		<br>
+		<span>0.000</span>
+		<hr>
+		Total Supply
+	</div>
+	<div class="card" onclick="window.location=''">
+		<br>
+		<span>$ 0.000</span>
+		<hr>
+		Price (in USD)
+	</div>
+	<div class="card" onclick="window.location=''">
+		<br>
+		<span>1.000 x</span>
+		<hr>
+		Net Returns
+	</div>
+	<div class="card" onclick="window.location=''">
+		<br>
+		<span>0x0000-0000</span>
+		<hr>
+		Smart Contract
+	</div>
+
+
+</div>
 
 <br><br><br><br>
 <hr class="hr1">
@@ -260,18 +292,20 @@ This strategy takes in Mojito LP of USDC+KCS as deposits. It stakes them at the 
 <h3>General Information</h3>
 <h4>Advantages of Kompounders (Granaries)</h4>
 Compounding yield requires transaction fees to be paid to the blockchain. This can add up quickly to be expensive and cut into returns. As we batch your transaction with many other depositor's transactions, it brings about a cumulatively lower cost and higher return to earn yield using the Kompounder (Granary).
-For a new user, 13 transactions need to be made to make their first farm yield compound : Buy token P, Buy token Q, Approve token P, Approve token Q, Add P-Q Liquidity, Approve Farm for P-Q LP, Deposit P-Q LP tokens, Harvest yield token R, Approve yielded token R, Sell token R for P, Sell token R for Q, Add P-Q Liquidity and finally Deposit the gained P-Q LP tokens! For subsequent compounds, a user needs to make 5 transactions everytime they wish to compound.
+<br><br>
+<i>For a new user, 13 transactions need to be made to make their first farm yield compound : Buy token P, Buy token Q, Approve token P, Approve token Q, Add P-Q Liquidity, Approve Farm for P-Q LP, Deposit P-Q LP tokens, Harvest yield token R, Approve yielded token R, Sell token R for P, Sell token R for Q, Add P-Q Liquidity and finally Deposit the gained P-Q LP tokens! For subsequent compounds, a user needs to make 5 transactions everytime they wish to compound.</i>
+<br><br>
 Kompounders (Granaries) free our users from this burden of manually sending dozens of transactions daily and save their effort, time and precious KCS & FTM! This results in a compounded yield, which is greater than simple farming.
-
+<br><br>
 <h4>Frequency of Compounding</h4>
 Farms are compounded either on deposits or on withdrawals made into the Kompounder (Granary). Compounding also occurs when a user ("Worker") does work by pressing the "Start Working" button and successfully completing the resulting transaction. It is as important to not compound too early as it is to compound too late.
-
+<br><br>
 <h4>Wages for the Workers (Incentives)</h4>
 Compounding transactions are complex smart contract functions which cost the worker a small amount of KCS or FTM as a "gas fee". To compensate the workers for their hardwork, we reward them with a share in the AUM of the Kompounder (Granary), equivalent to 1% of the value harvested from the underlying farm. This share grows inside the Kompounder (Granary) in value on its own if left unattended by the Worker.
-
+<br><br>
 <h4>Fees and taxes</h4>
 There is No deposit fee. There is No withdrawal fee. 1% from the harvest is paid to the workers and 1% from the harvest is added to the ELITE DAO treasury for the upkeep of this platform. These 2% are charged on gains only and not on principal investments.
-
+<br><br>
 <h4>KP & GRAINS - Protocol Receipt tokens</h4>
 Upon each deposit, including worker payouts, the Kompounder (Granary) issues special tokens called KP (GRAIN) tokens that represent a user's share in the AUM of the specific Kompounder (Granary). These are standard ERC20 compliant tokens that can be used freely elsewhere on the blockchains. Withdrawing funds without possesing them is not possible. Please dont give these to strangers.
 
