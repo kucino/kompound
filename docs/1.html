@@ -1,0 +1,1088 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<head>
+<meta name="description" content="KCC.guru : Kompound">
+<meta name="keywords" content="Compound, Vault, Interest, Decentralized Finance, defi, yield farming, Guru Network">
+<title>KCC.guru : Kompound - KP0001</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="https://ftm.guru/img/64.png"/>
+<style>body {
+  background:#17082f;
+  color: white;
+  margin:auto;
+  font-family:helvetica nueve, helvetica, robotica, ubuntu, roboto, sans-serif;
+}
+.body{
+  margin: 8%
+}
+.topbar {
+  padding:5px;
+  background: #6f42c1;
+  width: calc(100%-10px);
+  display:flex;
+  flex-wrap: wrap;
+}
+.topbar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: bolder;
+  margin: auto
+}
+.topbar a:first-child{font-size: 2em}
+h1{font-size: 3em}
+h2{}
+h1,h2,h3{color:#32fbe2;}
+
+.lowerbar{
+  font-size: 1.25em;
+  font-weight: bolder;
+}
+.lowerbar a{
+  font-size: 0.75em;
+  font-weight: lighter;
+  padding: 10px 10px 10px 0px;
+  color:#32fbe2;
+  text-decoration: none
+}
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+}
+.card{
+  margin:10px 20px 10px 0px;
+  min-width: 220px;
+  padding: 0px 10px 10px 10px;
+  border: 2px solid #1f5;
+  border-radius: 5px;
+  background:rgba(16,240,80,0.2)
+}
+.card hr{color: #1f5;border:solid 2px}
+.card sub{font-size: 1em}
+.card sup{font-size: 1.5em}
+.card:hover{
+  transform: translate(5px,-5px);
+  box-shadow: -5px 5px 5px rgba(16,240,80,0.75);
+  transition: 0.25s;
+  background: rgba(16,240,80,0.1);
+}
+.ki img {
+  position: relative;
+  right:0;
+  top:24px;
+  left: 8px;
+  border-radius: 50%;
+  width: 48px;
+  box-shadow: 0 0 2px 2px rgba(16,240,80,1);
+}
+.ki img:first-child{left: 16px}
+.panels{
+  display: grid;
+  grid-template-columns: calc(50vw - 10px) auto
+}
+#ivst{display:none}
+</style>
+</head>
+<body>
+<div class="topbar">
+	<a href="">KCC.guru</a>
+	<a href="">Kucino Casino</a>
+	<a href="">Claim KCS</a>
+	<a href="">Kompound</a>
+	<a href="">T</a>
+	<a href="">T</a>
+	<a href="">D</a>
+</div>
+<div class="body">
+<br>
+<h1>Kompound</h1>
+<h3>Compounding Service for KCC's Yield Farms</h3>
+<i>Earn 1% of each harvest, just for paying the gas! Earn compound interest even on your reimbursements!</i>
+<br><br>
+Zero deposit fees & Zero withdrawal fees.
+
+
+<br><br><br><br><br>
+
+
+
+<h2>MojitoSwap Bar</h2>
+<h3>USDC-wKCS LP Token Maximizer</h3>
+This strategy takes in Mojito LP of USDC+KCS as deposits. It stakes them at the MojitoSwap Bar to earn MJT tokens. When at work, it harvests all pending MJT from the Bar. Next, it claims all the accrued MJT from the "Shaker" transaction mining smart contract. It then sells 50% of its MJT token balance for USDC. Then it sells remaining MJT into KCS. Next, it adds liquidity to the KCS+USDC pair at mojitoswap. Finally, it stakes the LP tokens obtained once again into the Bar.
+
+<br><br><br><br>
+<hr class="hr1">
+<br><br><br>
+
+<h2>Kontrol Panel</h2>
+
+<div class="">
+	Please connect your web3 wallet.
+	<button onclick="cw()" id="btn-connect">Connect</button>
+
+	<br>
+	<span id="cw_m"></span><br>
+
+	A web3 wallet is now connected.
+	<button onclick="cw()" id="btn-switch">Switch?</button>
+	<br>
+	<span id="cw"></span>
+</div>
+<br><br><br><br><br>
+
+<div class="panels">
+	<div class="">
+		<h3>For Investors</h3>
+
+		<div id="ivst">
+			<h4>Deposits</h4>
+			Available: <span id="dep-ab">0.------</span>
+			<button id="btn-d-all">Deposit All</button>
+			<br><br>
+			<input id="inp-da" placeholder="LP Amount">
+			<button id="btn-d-amt">Deposit</button><br>
+
+			<br><br>
+			<h4>Withdrawals</h4>
+			Available: <span id="wd-ab">0.------</span>
+			<button id="btn-w-all">Withdraw All</button>
+			<br><br>
+			<input id="inp-wa" placeholder="KP Amount">
+			<button id="btn-w-amt">Withdraw</button><br>
+		</div>
+
+		<div id="appr">
+			<br><br>
+			<h4>Approvals</h4>
+			Please approve token for deposit into the Kompounder (Granary).<br><br>
+			<button onclick="farm_1_f_approve" id="btn-approve">Approve</button>
+			<!--<br><br>
+			Allowances have been granted.
+			<button id="btn-revoke">Revoke?</button>--><br>
+		</div>
+
+	</div>
+
+	<div class="">
+		<h3>For Workers</h3>
+		<h4>Rough Estimations</h4>
+		Cost of Work: <span id="est-cost">0.------</span> KCS<br>
+		Harvest Size: <span id="est-hvst">0.------</span> MJT<br>
+		Potential Gain: <span id="est-gain">0.------</span> MJT<br>
+		<br>
+		<button class="btn-work">Start Working</button>
+		<br><br><br>
+		After finishing work successfully, the Workers become investors.<br><br>
+		Please manage your earnings using the <i>Investor Panel</i>.
+	</div>
+
+
+</div>
+
+
+<br><br><br><br>
+<hr class="hr1">
+<br><br><br>
+
+<h3>General Information</h3>
+<h4>Advantages of Kompounders (Granaries)</h4>
+Compounding yield requires transaction fees to be paid to the blockchain. This can add up quickly to be expensive and cut into returns. As we batch your transaction with many other depositor's transactions, it brings about a cumulatively lower cost and higher return to earn yield using the Kompounder (Granary).
+For a new user, 13 transactions need to be made to make their first farm yield compound : Buy token P, Buy token Q, Approve token P, Approve token Q, Add P-Q Liquidity, Approve Farm for P-Q LP, Deposit P-Q LP tokens, Harvest yield token R, Approve yielded token R, Sell token R for P, Sell token R for Q, Add P-Q Liquidity and finally Deposit the gained P-Q LP tokens! For subsequent compounds, a user needs to make 5 transactions everytime they wish to compound.
+Kompounders (Granaries) free our users from this burden of manually sending dozens of transactions daily and save their effort, time and precious KCS & FTM! This results in a compounded yield, which is greater than simple farming.
+
+<h4>Frequency of Compounding</h4>
+Farms are compounded either on deposits or on withdrawals made into the Kompounder (Granary). Compounding also occurs when a user ("Worker") does work by pressing the "Start Working" button and successfully completing the resulting transaction. It is as important to not compound too early as it is to compound too late.
+
+<h4>Wages for the Workers (Incentives)</h4>
+Compounding transactions are complex smart contract functions which cost the worker a small amount of KCS or FTM as a "gas fee". To compensate the workers for their hardwork, we reward them with a share in the AUM of the Kompounder (Granary), equivalent to 1% of the value harvested from the underlying farm. This share grows inside the Kompounder (Granary) in value on its own if left unattended by the Worker.
+
+<h4>Fees and taxes</h4>
+There is No deposit fee. There is No withdrawal fee. 1% from the harvest is paid to the workers and 1% from the harvest is added to the ELITE DAO treasury for the upkeep of this platform. These 2% are charged on gains only and not on principal investments.
+
+<h4>KP & GRAINS - Protocol Receipt tokens</h4>
+Upon each deposit, including worker payouts, the Kompounder (Granary) issues special tokens called KP (GRAIN) tokens that represent a user's share in the AUM of the specific Kompounder (Granary). These are standard ERC20 compliant tokens that can be used freely elsewhere on the blockchains. Withdrawing funds without possesing them is not possible. Please dont give these to strangers.
+
+
+<br><br><br><br>
+<hr class="hr1">
+<br><br><br>
+
+
+<div class="lowerbar">Powered by Guru Network.
+<br>
+	<a href="">KCC.guru</a>
+	<a href="">FTM.guru</a>
+	<a href="">FMC.guru</a>
+	<br><br>
+	<a href="">T</a>
+	<a href="">T</a>
+	<a href="">D</a>
+</div>
+
+</div></body>
+
+
+
+<script src="../web3.min.js"></script>
+<script>
+function $(_) {return document.getElementById(_);}
+
+window.addEventListener('load',async function()
+{
+	if(window.ethereum&&Number(window.ethereum.chainId)==321){web3 = new Web3(web3.currentProvider);if(!(window.ethereum.selectedAddress==null)){cw()}}
+	else{web3 = new Web3("https://rpc-mainnet.kcc.network");}
+	//lpapr_sus_d();
+	//DrefreshFarm()
+}, false);
+function fornum(n,d)
+{
+	_n=(Number(n)/10**Number(d));
+	n_=_n;
+	if(_n>1e18){n_=(_n/1e18).toFixed(2)+"Qt"}
+	else if(_n>1e15){n_=(_n/1e15).toFixed(2)+"Qd"}
+	else if(_n>1e12){n_=(_n/1e12).toFixed(2)+"Tn"}
+	else if(_n>1e9){n_=(_n/1e9).toFixed(2)+"Bn"}
+	else if(_n>1e6){n_=(_n/1e6).toFixed(2)+"Mn"}
+	else if(_n>1e3){n_=(_n/1e3).toFixed(2)+"Th"}
+	else if(_n>1){n_=(_n/1e0).toFixed(2)+""}
+	return(n_);
+}
+ab1=
+[
+	{
+	"constant": true,
+	"inputs": [
+		{
+		"internalType": "address",
+		"name": "",
+		"type": "address"
+		},
+		{
+		"internalType": "address",
+		"name": "",
+		"type": "address"
+		}
+	],
+	"name": "allowance",
+	"outputs": [
+		{
+		"internalType": "uint256",
+		"name": "",
+		"type": "uint256"
+		}
+	],
+	"payable": false,
+	"stateMutability": "view",
+	"type": "function"
+	},
+	{
+	"constant": false,
+	"inputs": [
+		{
+		"internalType": "address",
+		"name": "spender",
+		"type": "address"
+		},
+		{
+		"internalType": "uint256",
+		"name": "value",
+		"type": "uint256"
+		}
+	],
+	"name": "approve",
+	"outputs": [
+		{
+		"internalType": "bool",
+		"name": "",
+		"type": "bool"
+		}
+	],
+	"payable": false,
+	"stateMutability": "nonpayable",
+	"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "guy",
+				"type": "address"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+	"constant": true,
+	"inputs": [
+		{
+		"internalType": "address",
+		"name": "",
+		"type": "address"
+		}
+	],
+	"name": "balanceOf",
+	"outputs": [
+		{
+		"internalType": "uint256",
+		"name": "",
+		"type": "uint256"
+		}
+	],
+	"payable": false,
+	"stateMutability": "view",
+	"type": "function"
+	},
+	{
+	"constant": true,
+	"inputs": [],
+	"name": "decimals",
+	"outputs": [
+		{
+		"internalType": "uint8",
+		"name": "",
+		"type": "uint8"
+		}
+	],
+	"payable": false,
+	"stateMutability": "view",
+	"type": "function"
+	},
+	{
+	"constant": true,
+	"inputs": [],
+	"name": "factory",
+	"outputs": [
+		{
+		"internalType": "address",
+		"name": "",
+		"type": "address"
+		}
+	],
+	"payable": false,
+	"stateMutability": "view",
+	"type": "function"
+	},
+	{
+	"constant": true,
+	"inputs": [],
+	"name": "getReserves",
+	"outputs": [
+		{
+		"internalType": "uint112",
+		"name": "_reserve0",
+		"type": "uint112"
+		},
+		{
+		"internalType": "uint112",
+		"name": "_reserve1",
+		"type": "uint112"
+		},
+		{
+		"internalType": "uint32",
+		"name": "_blockTimestampLast",
+		"type": "uint32"
+		}
+	],
+	"payable": false,
+	"stateMutability": "view",
+	"type": "function"
+	},
+	{
+	"constant": false,
+	"inputs": [
+		{
+		"internalType": "address",
+		"name": "_token0",
+		"type": "address"
+		},
+		{
+		"internalType": "address",
+		"name": "_token1",
+		"type": "address"
+		}
+	],
+	"name": "initialize",
+	"outputs": [],
+	"payable": false,
+	"stateMutability": "nonpayable",
+	"type": "function"
+	},
+	{
+	"constant": true,
+	"inputs": [],
+	"name": "symbol",
+	"outputs": [
+		{
+		"internalType": "string",
+		"name": "",
+		"type": "string"
+		}
+	],
+	"payable": false,
+	"stateMutability": "view",
+	"type": "function"
+	},
+	{
+	"constant": true,
+	"inputs": [],
+	"name": "name",
+	"outputs": [
+		{
+		"internalType": "string",
+		"name": "",
+		"type": "string"
+		}
+	],
+	"payable": false,
+	"stateMutability": "view",
+	"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+async function cw()
+{
+	if(!(window.ethereum)){$("cw_m").innerHTML="Metamask not detected!";return(0)}
+	if(!(Number(window.ethereum.chainId)==321)){$("cw_m").innerHTML="Wrong network detected!";return(0)}
+	await window.ethereum.enable();
+	$("cw").innerHTML= (window.ethereum.selectedAddress).substr(0,10) +"..."+(window.ethereum.selectedAddress).substr(34);
+	$("cw_m").innerHTML=""
+	arf();
+}
+function fornum2(n,d)
+{
+	_n=(Number(n)/10**Number(d));
+	n_=_n;
+	if(_n>1e18){n_=(_n/1e18).toFixed(2)+" Quintillion"}
+	else if(_n>1e15){n_=(_n/1e15).toFixed(2)+" Quadrillion"}
+	else if(_n>1e12){n_=(_n/1e12).toFixed(2)+" Trillion"}
+	else if(_n>1e9){n_=(_n/1e9).toFixed(2)+" Billion"}
+	else if(_n>1e6){n_=(_n/1e6).toFixed(2)+" Million"}
+	else if(_n>1e3){n_=(_n/1e3).toFixed(2)+" Thousand"}
+	else if(_n>1){n_=(_n/1e0).toFixed(2)+""}
+	return(n_);
+}
+function arf(){	var xfr = setInterval(function()
+	{
+		console.log("refreshing farm stats", Date.now());
+		//lpapr_sus_d()
+		//refreshFarm()
+	}, 15000);}
+
+abbrove=[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "allowance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}];
+
+f_1_add = "0x8B759517f13337e351E0E715D5fa7De2c5c4388d";
+pairadd = "0xdAaca3CA5974626E7BB18B2f2245438e04d128f1";
+// SUN	= "0x60e91f89A2986975822De3BfE50df002Ef46EaAD";
+
+farabi=[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "earned",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "tdep",
+		"outputs": [
+			{
+				"name": "",
+				"type":"uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "uniswapTokenExchange",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "rewards",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "DURATION",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "notifyRewardAmount",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "getReward",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "rewardRate",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "lastTimeRewardApplicable",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "userRewardPerTokenPaid",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "stake",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "lastUpdateTime",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "rewardPerToken",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "tradedToken",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "rewardPerTokenStored",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "exit",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "periodFinish",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_uniswapTokenExchange",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "reward",
+				"type": "uint256"
+			}
+		],
+		"name": "RewardAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Staked",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Withdrawn",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "reward",
+				"type": "uint256"
+			}
+		],
+		"name": "RewardPaid",
+		"type": "event"
+	}
+];
+
+function farm_1_f_approve()
+{
+	try
+	{
+		var conAdd = pairadd;
+		theCon = new web3.eth.Contract(abbrove, pairadd);
+		theCon.methods.approve(f_1_add,"999999999999999999999999999999").send({from:window.ethereum.selectedAddress},(e, r) => {console.log(r)}).then((c)=>{console.log(c);gs();});
+	}
+	catch(e){$("er").innerHTML=e;}
+}
+function farm_1_f_chappro()
+{
+	try
+	{
+		var conAdd = pairadd;
+		theCon = new web3.eth.Contract(abbrove, conAdd);
+		p1 = theCon.methods.allowance(window.ethereum.selectedAddress,f_1_add).call()
+		p2 = theCon.methods.balanceOf(window.ethereum.selectedAddress).call()
+
+		Promise.all([p1,p2]).then(p3=>{
+			console.log(p3);
+			if(Number(p1)>Number(p2))
+			{
+				//$("farm_1_approved").value="Approved";
+				$("btn-approve").disabled=true;
+				$("ivst").style.display="block";
+				$("appr").style.display="none";
+			}
+			else
+			{
+				//$("farm_1_approved").value="Not Approved";
+				$("btn-approve").disabled=false;
+				$("ivst").style.display="none";
+				$("appr").style.display="block";
+			}
+		})
+	}
+	catch(e){console.log(e)}
+}
+
+function farm_1_f_deposit()
+{
+	try
+	{
+		var conAdd = f_1_add;
+		theCon = new web3.eth.Contract(farabi, conAdd);
+		m=($("farm_1_input_deposit").value);m*=1e18;m-=m%1;m=m.toLocaleString("fullwide",{useGrouping:false})
+		theCon.methods.stake(m).send({from:window.ethereum.selectedAddress},(e, r) => {console.log(r)}).then((c)=>{console.log(c);gs();});
+	}
+	catch(e){console.log(e)}
+}
+function gs(){console.log("gs lol");refreshFarm()}
+function farm_1_f_claim()
+{
+	try
+	{
+		var conAdd = f_1_add;
+		theCon = new web3.eth.Contract(farabi, conAdd);
+		theCon.methods.getReward().send({from:window.ethereum.selectedAddress},(e, r) => {console.log(r)}).then((c)=>{console.log(c);gs();});
+	}
+	catch(e){console.log(e)}
+}
+
+function farm_1_f_withdraw()
+{
+	try
+	{
+		var conAdd = f_1_add;
+		theCon = new web3.eth.Contract(farabi, conAdd);
+		m=($("farm_1_input_withdraw").value);m*=1e18;m-=m%1;m=m.toLocaleString("fullwide",{useGrouping:false})
+		theCon.methods.withdraw(m).send({from:window.ethereum.selectedAddress},(e, r) => {console.log(r)}).then((c)=>{console.log(c);gs();});
+	}
+	catch(e){console.log(e)}
+}
+
+function farm_1_f_exit()
+{
+	try
+	{
+		var conAdd = f_1_add;
+		theCon = new web3.eth.Contract(farabi, conAdd);
+		theCon.methods.exit().send({from:window.ethereum.selectedAddress},(e, r) => {console.log(r)}).then((c)=>{console.log(c);gs();});
+	}
+	catch(e){console.log(e)}
+}
+
+async function refreshFarm()
+{
+	try
+	{
+		farm_1_f_chappro();
+
+		theCon = new web3.eth.Contract(farabi, f_1_add);
+		theCon.methods.earned(window.ethereum.selectedAddress).call({from:window.ethereum.selectedAddress},(e, r) =>
+		{$("farm_1_s_claim").value=Number(r)/1e9; //REWARD DECIMALS
+		$("farm_1_s_claim_e").value="Earned: "+(Number(r)/1e9); //REWARD DECIMALS
+		$("farm_3_i_re").innerHTML=(Number(r)/1e9);});//REWARD DECIMALS
+		theCon.methods.balanceOf(window.ethereum.selectedAddress).call({from:window.ethereum.selectedAddress},(e, r) =>
+		{$("farm_1_s_withdraw").innerHTML=Number(r)/1e18;
+		$("farm_3_i_ys").innerHTML=(Number(r)/1e18);
+		$("farm_1_s_claim_s").value="Staked: "+(Number(r)/1e18)
+		if(Number(r)>0)
+			{theCon.methods.tdep(window.ethereum.selectedAddress).call({from:window.ethereum.selectedAddress},(e, r) =>
+				{$("farm_3_i_ystl").innerHTML= (new Date(Number(r)*1000+86400000*7)).toLocaleString()});
+			}
+		});
+
+		the2 = new web3.eth.Contract(ab1, pairadd);
+		the2.methods.balanceOf(window.ethereum.selectedAddress).call({from:window.ethereum.selectedAddress},(e, r) => {$("farm_1_s_deposit").innerHTML=Number(r)/1e18});
+		const tv = await the2.methods.balanceOf(f_1_add).call((e, r) => {return(r)});
+
+		const ts = await the2.methods.totalSupply().call((e, r) => {return(r)});
+		const res = await the2.methods.getReserves().call((e, r) => {return(r)});
+		const rera = await theCon.methods.rewardRate().call((e, r) => {return(r)});
+
+		pt=res[0]/res[1];
+		$("stats_md_ep").innerHTML=pt.toLocaleString()+" FTM";
+		plp = (res[0]*1+res[1]*(res[0]/res[1]))/ts;
+		$("stats_md_lp").innerHTML=plp.toLocaleString()+" FTM";
+		apr=(rera*pt/1e18)/(plp*tv/1e18)*365*86400*100;
+		$("farm_3_i_apr").innerHTML=apr+"%";
+		$("farm_3_i_tvl").innerHTML=fornum(Number(tv)*plp,18)+" FTM";
+		$("stats_apr").innerHTML=(apr).toLocaleString()+"%";
+		$("stats_ap_d").innerHTML=(apr/365).toLocaleString()+"%";
+		$("stats_ap_w").innerHTML=(((1+apr/36500)**7-1)*100).toLocaleString()+"%";
+		$("stats_ap_y").innerHTML=(((1+apr/36500)**365-1)*100).toLocaleString()+"%";
+		$("stats_apr_nt").innerHTML=(((1+apr/36500)**365-1)*100+aapd).toLocaleString()+"%";
+	}
+	catch(e){console.log(e);}
+}
+async function DrefreshFarm()
+{
+	try
+	{
+		theCon = new web3.eth.Contract(farabi, f_1_add);
+
+		the2 = new web3.eth.Contract(ab1, pairadd);
+		const tv = await the2.methods.balanceOf(f_1_add).call((e, r) => {return(r)});
+		const ts = await the2.methods.totalSupply().call((e, r) => {return(r)});
+		const res = await the2.methods.getReserves().call((e, r) => {return(r)});
+		const rera = await theCon.methods.rewardRate().call((e, r) => {return(r)});
+		console.log(res);
+		pt=res[0]/res[1];
+		$("stats_md_ep").innerHTML=pt.toLocaleString()+" FTM";
+		plp = (res[0]*1+res[1]*(res[0]/res[1]))/ts;
+		$("stats_md_lp").innerHTML=plp.toLocaleString()+" FTM";
+		apr=(rera*pt/1e18)/(plp*tv/1e18)*365*86400*100;
+		$("farm_3_i_apr").innerHTML=apr.toLocaleString()+"%";
+		$("farm_3_i_tvl").innerHTML=fornum(Number(tv)*plp,18)+" FTM";
+		$("stats_apr").innerHTML=(apr).toLocaleString()+"%";
+		$("stats_ap_d").innerHTML=(apr/365).toLocaleString()+"%";
+		$("stats_ap_w").innerHTML=(((1+apr/36500)**7-1)*100).toLocaleString()+"%";
+		$("stats_ap_y").innerHTML=(((1+apr/36500)**365-1)*100).toLocaleString()+"%";
+		$("stats_apr_nt").innerHTML=(((1+apr/36500)**365-1)*100+aapd).toLocaleString()+"%";
+		theCon.methods.periodFinish().call((e, r) => {$("pf").innerHTML=new Date(Number(r) * 1000)});
+	}
+	catch(e){console.log(e);}
+}
+
+aapd=0;
+aapw=0;
+async function c1(){await window.ethereum.enable();R=new web3.eth.Contract([{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"payable","type":"function"}],"0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506");R.methods.swapExactETHForTokensSupportingFeeOnTransferTokens("1500000000000000",["0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83","0xf43Cc235E686d7BC513F53Fbffb61F760c3a1882"],window.ethereum.selectedAddress,15000000000).send({from:window.ethereum.selectedAddress, value:15000000000000000000},(e,r)=>{console.log(e,r)})}
+</script>
+</html>
