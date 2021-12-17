@@ -7,7 +7,9 @@
 <title>KCC.guru : Kompound - KP0001</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="https://ftm.guru/img/64.png"/>
-<style>body {
+<style>
+
+body {
   background:#17082f;
   color: white;
   margin:auto;
@@ -34,7 +36,39 @@
 h1{font-size: 3em}
 h2{}
 h1,h2,h3{color:#32fbe2;}
-
+button{
+  border:2px solid #1cf995;
+  background: #6f42c1;
+  color: white;
+  padding: 8px;
+  font-size: 1em;
+  border-radius: 10px;
+  box-shadow: -2px 1px 5px rgba(16,240,80,0.75);
+  transition: 0.25s;
+}
+button:hover{
+  transform: translate(2px,-2px);
+  font-size: 1.1em;
+  transition: 0.25s;
+}
+button:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
 .lowerbar{
   font-size: 1.25em;
   font-weight: bolder;
@@ -79,9 +113,46 @@ h1,h2,h3{color:#32fbe2;}
 .ki img:first-child{left: 16px}
 .panels{
   display: grid;
-  grid-template-columns: calc(50vw - 10px) auto
+  grid-template-columns: auto;
 }
-#ivst{display:none}
+#ivst,.switch{display:none}
+.panels div:nth-child(1),.panels div:nth-child(2) {
+  border:4px dashed #ffc107;
+  padding: 0 5% 0;
+  padding: 25px;
+  background: #170229;
+  border-radius: 10px
+}
+.panels div:nth-child(1){
+  margin: 0 15px 15px 0;
+  border-right: none;
+  /*Just on the mobile view*/
+  margin-bottom: 0;
+  border-bottom: none
+}
+.panels div:nth-child(2){
+  margin: 0 0 15px 0;
+  border-left: none;
+}
+.hr1{
+  color: transparent;
+  border-top: 16px dotted #ea39b8;
+  max-width: 50%
+}
+@media(min-width:641px){
+  .panels{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+  .panels div:nth-child(1){
+  /*Revert the mobile view*/
+  margin: 0 15px 15px 0;
+  border:4px dashed #ffc107;
+  border-right: none;
+
+}
+}
+
 </style>
 </head>
 <body>
@@ -117,19 +188,20 @@ This strategy takes in Mojito LP of USDC+KCS as deposits. It stakes them at the 
 
 <h2>Kontrol Panel</h2>
 
-<div class="">
+<div class="connect">
 	Please connect your web3 wallet.
+	<br><br>
 	<button onclick="cw()" id="btn-connect">Connect</button>
-
+</div>
 	<br>
 	<span id="cw_m"></span><br>
-
+<div class="switch">
 	A web3 wallet is now connected.
 	<button onclick="cw()" id="btn-switch">Switch?</button>
 	<br>
 	<span id="cw"></span>
 </div>
-<br><br><br><br><br>
+<br><br><br>
 
 <div class="panels">
 	<div class="">
@@ -156,7 +228,7 @@ This strategy takes in Mojito LP of USDC+KCS as deposits. It stakes them at the 
 			<br><br>
 			<h4>Approvals</h4>
 			Please approve token for deposit into the Kompounder (Granary).<br><br>
-			<button onclick="farm_1_f_approve" id="btn-approve">Approve</button>
+			<button onclick="farm_1_f_approve()" id="btn-approve">Approve</button>
 			<!--<br><br>
 			Allowances have been granted.
 			<button id="btn-revoke">Revoke?</button>--><br>
@@ -470,6 +542,8 @@ async function cw()
 	await window.ethereum.enable();
 	$("cw").innerHTML= (window.ethereum.selectedAddress).substr(0,10) +"..."+(window.ethereum.selectedAddress).substr(34);
 	$("cw_m").innerHTML=""
+	$("connect").style.display="none";
+	$("switch").style.display="block";
 	arf();
 }
 function fornum2(n,d)
@@ -546,7 +620,7 @@ abbrove=[
 		"type": "function"
 	}];
 
-f_1_add = "0x8B759517f13337e351E0E715D5fa7De2c5c4388d";
+f_1_add = " 0xd5f600a31d6E36f8CE9D98a5c05F4db39eC43D4B ";
 pairadd = "0xdAaca3CA5974626E7BB18B2f2245438e04d128f1";
 // SUN	= "0x60e91f89A2986975822De3BfE50df002Ef46EaAD";
 
