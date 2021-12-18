@@ -88,6 +88,7 @@ button:active {
   background: rgba(16,240,80,0.1);
 }
 .card span{font-size: 2em}
+.card a{text-decoration: none;color: inherit}
 .ki img {
   position: relative;
   top:8px;
@@ -146,11 +147,11 @@ button:active {
 </head>
 <body>
 <div class="topbar">
-	<a href="">KCC.guru</a>
-	<a href="">Kucino Casino</a>
-	<a href="">Claim KCS</a>
-	<a href="">Kompound</a>
-	<a href="">Kscan</a>
+	<a target="_blank" href="https://kcc.guru">KCC.guru</a>
+	<a target="_blank" href="https://kcc.guru/casino">Kucino Casino</a>
+	<a target="_blank" href="https://kcc.guru/dashboard">Claim KCS</a>
+	<a target="_blank" href="https://kcc.guru/kompound">Kompound</a>
+	<a target="_blank" href="https://kcc.guru/kscan">Kscan</a>
 </div>
 <div class="body">
 <br>
@@ -319,20 +320,20 @@ Upon each deposit, including worker payouts, the Kompounder (Granary) issues spe
 
 <div class="lowerbar">Powered by Guru Network.
 <br>
-	<a href="">KCC.guru</a>
-	<a href="">FTM.guru</a>
-	<a href="">FMC.guru</a>
+	<a target="_blank" href="https://kcc.guru">KCC.guru</a>
+	<a target="_blank" href="https://ftm.guru">FTM.guru</a>
+	<a target="_blank" href="https://fmc.guru">FMC.guru</a>
 	<br><br>
-	<a href="">T</a>
-	<a href="">T</a>
-	<a href="">D</a>
+	<a target="_blank" href="https://twitter.com/ftm1337">T</a>
+	<a target="_blank" href="https://t.me/kucino">T</a>
+	<a target="_blank" href="https://discord.com/invite/QpyfMarNrV">D</a>
 </div>
 
 </div></body>
 
 
 
-<script src="../web3.min.js"></script>
+<script src="web3.min.js"></script>
 <script>
 function $(_) {return document.getElementById(_);}
 
@@ -340,8 +341,7 @@ window.addEventListener('load',async function()
 {
 	if(window.ethereum&&Number(window.ethereum.chainId)==321){web3 = new Web3(web3.currentProvider);if(!(window.ethereum.selectedAddress==null)){cw()}}
 	else{web3 = new Web3("https://rpc-mainnet.kcc.network");}
-	//lpapr_sus_d();
-	//DrefreshFarm()
+	DrefreshFarm()
 }, false);
 function fornum(n,d)
 {
@@ -353,7 +353,7 @@ function fornum(n,d)
 	else if(_n>1e9){n_=(_n/1e9).toFixed(2)+"Bn"}
 	else if(_n>1e6){n_=(_n/1e6).toFixed(2)+"Mn"}
 	else if(_n>1e3){n_=(_n/1e3).toFixed(2)+"Th"}
-	else if(_n>1){n_=(_n/1e0).toFixed(2)+""}
+	else if(_n>0){n_=(_n/1e0).toFixed(5)+""}
 	return(n_);
 }
 ab1=
@@ -599,9 +599,9 @@ function fornum2(n,d)
 function arf(){	var xfr = setInterval(function()
 	{
 		console.log("refreshing farm stats", Date.now());
-		//lpapr_sus_d()
-		//refreshFarm()
-	}, 15000);}
+		gubs()
+		DrefreshFarm()
+	}, 30000);}
 
 abbrove=[
 	{
@@ -716,7 +716,8 @@ function deposit()
 	catch(e){console.log(e)}
 }
 function gs(){console.log("gs lol");
-//refreshFarm()
+gubs()
+DrefreshFarm()
 }
 
 function doHardWork()
@@ -788,7 +789,11 @@ async function DrefreshFarm()
 {
 	try
 	{
-		$("c_sc").innerHTML=f_1_add.substr(0,6)+"―"+f_1_add.substr(38);
+		$("c_sc").innerHTML=`<a
+			href="https://scan.kcc.io/address/${f_1_add}"
+			target="_blank"
+			>${f_1_add.substr(0,6)+"―"+f_1_add.substr(38)}</a>
+		`;
 		con = new web3.eth.Contract(farabi, f_1_add);
 		lpt = new web3.eth.Contract(ab1, pairadd);
 		ts = con.methods.totalSupply().call()
@@ -797,11 +802,11 @@ async function DrefreshFarm()
 		//mc = con.methods.info().call()
 		await Promise.all([ts,lpts,lpgr]).then(d=>{
 			kpts = (Number(d[0])/1e18);
-			$("c_ts").innerHTML = kpts.toLocaleString();
+			$("c_ts").innerHTML = fornum(kpts,0);
 			plp = Number(d[2][1])/1e18 * 2 / (Number(d[1])/1e18);
 			//mcd = d[3][0][0];
 			//mcp = d[3][0][1]
-			//$("c_nr").innerHTML = (mcd/kpts).toFixed(5) + " x";
+			//$("c_nr").innerHTML = fornum(mcd/kpts,0) + " x";
 			//tim = ((Date.now()/1e3 - GEN) / (365*86400));
 			//$("c_aa").innerHTML =  fornum((((mcd/kpts-1)*100)/tim),0)+" %";
 			//$("c_pu").innerHTML =  "$ " + fornum((plp*mcd/kpts),0);
