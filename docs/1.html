@@ -100,7 +100,9 @@ button:active {
   display: grid;
   grid-template-columns: auto;
 }
-#ivst,#switch{display:none}
+#ivst,#switch {
+  display:none;border:none
+  }
 .panels div:nth-child(1),.panels div:nth-child(2) {
   border:4px dashed #ffc107;
   padding: 0 5% 0;
@@ -654,7 +656,7 @@ abbrove=[
 		"type": "function"
 	}];
 
-f_1_add = "0xd5f600a31d6E36f8CE9D98a5c05F4db39eC43D4B ";
+f_1_add = "0xd5f600a31d6E36f8CE9D98a5c05F4db39eC43D4B";
 pairadd = "0x94bD136053aACcE8BC80EaAADfC7Bd1b1F5C51B3";
 tearned	= "0x2cA48b4eeA5A731c2B54e7C3944DBDB87c0CFB6F";
 
@@ -670,12 +672,13 @@ function farm_1_f_approve()
 	}
 	catch(e){$("er").innerHTML=e;}
 }
+
 function farm_1_f_chappro()
 {
 	try
 	{
 		var conAdd = pairadd;
-		theCon = new web3.eth.Contract(abbrove, conAdd);
+		theCon = new web3.eth.Contract(farabi, conAdd);
 		p1 = theCon.methods.allowance(window.ethereum.selectedAddress,f_1_add).call()
 		p2 = theCon.methods.balanceOf(window.ethereum.selectedAddress).call()
 
