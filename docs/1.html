@@ -100,7 +100,7 @@ button:active {
   display: grid;
   grid-template-columns: auto;
 }
-#ivst,.switch{display:none}
+#ivst,#switch{display:none}
 .panels div:nth-child(1),.panels div:nth-child(2) {
   border:4px dashed #ffc107;
   padding: 0 5% 0;
@@ -124,6 +124,10 @@ button:active {
   border-top: 16px dotted #ea39b8;
   max-width: 50%
 }
+.fore{color: gold !important;font-weight:400}
+#cw_m{color: #f23;font-weight: bold;text-shadow: 1px 1px 5px rgba(255,127,127,0.5)}
+
+
 @media(min-width:641px){
   .panels{
     display: grid;
@@ -136,8 +140,6 @@ button:active {
   border-right: none;
   }
 }
-.fore{color: gold !important;font-weight:400}
-#cw_m{color: #f23;font-weight: bold;text-shadow: 1px 1px 5px rgba(255,127,127,0.5)}
 </style>
 </head>
 <body>
@@ -218,14 +220,14 @@ This strategy takes in Mojito LP of USDC+KCS as collateral deposits for issuing 
 
 <h2>Kontrol Panel</h2>
 
-<div class="connect">
+<div id="connect">
 	Please connect your web3 wallet.
 	<br><br>
 	<button onclick="cw()" id="btn-connect">Connect</button>
 </div>
 	<br>
 	<span id="cw_m"></span><br>
-<div class="switch">
+<div id="switch">
 	A web3 wallet is now connected.
 	<button onclick="cw()" id="btn-switch">Switch?</button>
 	<br>
