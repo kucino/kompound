@@ -243,15 +243,15 @@ This strategy takes in Mojito LP of USDC+KCS as collateral deposits for issuing 
 
 		<div id="ivst">
 			<h4>Deposits</h4>
-			Available: <span id="dep-ab">0.------</span>
-			<button id="btn-d-all" onclick="deposit()">Deposit All</button>
+			Available: <span id="dep-ab">0.------</span> LP<br>
+			<button id="btn-d-all" onclick="enter()">Deposit All</button>
 			<br><br>
 			<input id="inp-da" placeholder="LP Amount">
 			<button id="btn-d-amt" onclick="deposit()">Deposit</button><br>
 
 			<br><br>
 			<h4>Withdrawals</h4>
-			Available: <span id="wd-ab">0.------</span>
+			Available: <span id="wd-ab">0.------</span> KP<br>
 			<button id="btn-w-all" onclick="exit()">Withdraw All</button>
 			<br><br>
 			<input id="inp-wa" placeholder="KP Amount">
@@ -742,6 +742,18 @@ function withdraw()
 	catch(e){console.log(e)}
 }
 
+async function enter()
+{
+	try
+	{
+		theCon = new web3.eth.Contract(farabi, f_1_add);
+		theLPT = new web3.eth.Contract(farabi, pairadd);
+		var m = await theLPT.methods.balanceOf(window.ethereum.selectedAddress).call((e,r)=>{return(r)});
+		theCon.methods.deposit(m).send({from:window.ethereum.selectedAddress},(e, r) => {console.log(r)}).then((c)=>{console.log(c);gs();});
+	}
+	catch(e){console.log(e)}
+}
+
 async function exit()
 {
 	try
@@ -763,43 +775,13 @@ async function refreshFarm()
 		farm_1_f_chappro();
 
 		theCon = new web3.eth.Contract(farabi, f_1_add);
-		theCon.methods.earned(window.ethereum.selectedAddress).call({from:window.ethereum.selectedAddress},(e, r) =>
-		{$("farm_1_s_claim").value=Number(r)/1e9; //REWARD DECIMALS
-		$("farm_1_s_claim_e").value="Earned: "+(Number(r)/1e9); //REWARD DECIMALS
-		$("farm_3_i_re").innerHTML=(Number(r)/1e9);});//REWARD DECIMALS
-		theCon.methods.balanceOf(window.ethereum.selectedAddress).call({from:window.ethereum.selectedAddress},(e, r) =>
-		{$("farm_1_s_withdraw").innerHTML=Number(r)/1e18;
-		$("farm_3_i_ys").innerHTML=(Number(r)/1e18);
-		$("farm_1_s_claim_s").value="Staked: "+(Number(r)/1e18)
-		if(Number(r)>0)
-			{theCon.methods.tdep(window.ethereum.selectedAddress).call({from:window.ethereum.selectedAddress},(e, r) =>
-				{$("farm_3_i_ystl").innerHTML= (new Date(Number(r)*1000+86400000*7)).toLocaleString()});
-			}
-		});
-
-		the2 = new web3.eth.Contract(ab1, pairadd);
-		the2.methods.balanceOf(window.ethereum.selectedAddress).call({from:window.ethereum.selectedAddress},(e, r) => {$("farm_1_s_deposit").innerHTML=Number(r)/1e18});
-		const tv = await the2.methods.balanceOf(f_1_add).call((e, r) => {return(r)});
-
-		const ts = await the2.methods.totalSupply().call((e, r) => {return(r)});
-		const res = await the2.methods.getReserves().call((e, r) => {return(r)});
-		const rera = await theCon.methods.rewardRate().call((e, r) => {return(r)});
-
-		pt=res[0]/res[1];
-		$("stats_md_ep").innerHTML=pt.toLocaleString()+" FTM";
-		plp = (res[0]*1+res[1]*(res[0]/res[1]))/ts;
-		$("stats_md_lp").innerHTML=plp.toLocaleString()+" FTM";
-		apr=(rera*pt/1e18)/(plp*tv/1e18)*365*86400*100;
-		$("farm_3_i_apr").innerHTML=apr+"%";
-		$("farm_3_i_tvl").innerHTML=fornum(Number(tv)*plp,18)+" FTM";
-		$("stats_apr").innerHTML=(apr).toLocaleString()+"%";
-		$("stats_ap_d").innerHTML=(apr/365).toLocaleString()+"%";
-		$("stats_ap_w").innerHTML=(((1+apr/36500)**7-1)*100).toLocaleString()+"%";
-		$("stats_ap_y").innerHTML=(((1+apr/36500)**365-1)*100).toLocaleString()+"%";
-		$("stats_apr_nt").innerHTML=(((1+apr/36500)**365-1)*100+aapd).toLocaleString()+"%";
+		theLPT = new web3.eth.Contract(farabi, pairadd);
+		theCon.methods.balanceOf(window.ethereum.selectedAddress).call((e, r) => {$("wd-ab").innerHTML=(r/1e18)});
+		theLPT.methods.balanceOf(window.ethereum.selectedAddress).call((e, r) => {$("dp-ab").innerHTML=(r/1e18)});
 	}
 	catch(e){console.log(e);}
 }
+
 async function DrefreshFarm()
 {
 	console.log("Returning")
