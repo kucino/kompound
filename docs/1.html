@@ -218,14 +218,14 @@ This strategy takes in Mojito LP of USDC+KCS as collateral deposits for issuing 
 
 <h2>Kontrol Panel</h2>
 
-<div id="connect">
+<div class="connect">
 	Please connect your web3 wallet.
 	<br><br>
 	<button onclick="cw()" id="btn-connect">Connect</button>
 </div>
 	<br>
 	<span id="cw_m"></span><br>
-<div id="switch">
+<div class="switch">
 	A web3 wallet is now connected.
 	<button onclick="cw()" id="btn-switch">Switch?</button>
 	<br>
@@ -240,18 +240,18 @@ This strategy takes in Mojito LP of USDC+KCS as collateral deposits for issuing 
 		<div id="ivst">
 			<h4>Deposits</h4>
 			Available: <span id="dep-ab">0.------</span>
-			<button id="btn-d-all" onclick="deposit()>Deposit All</button>
+			<button id="btn-d-all" onclick="deposit()">Deposit All</button>
 			<br><br>
 			<input id="inp-da" placeholder="LP Amount">
-			<button id="btn-d-amt" onclick="deposit()>Deposit</button><br>
+			<button id="btn-d-amt" onclick="deposit()">Deposit</button><br>
 
 			<br><br>
 			<h4>Withdrawals</h4>
 			Available: <span id="wd-ab">0.------</span>
-			<button id="btn-w-all" onclick="exit()>Withdraw All</button>
+			<button id="btn-w-all" onclick="exit()">Withdraw All</button>
 			<br><br>
 			<input id="inp-wa" placeholder="KP Amount">
-			<button id="btn-w-amt" onclick="withdraw()>Withdraw</button><br>
+			<button id="btn-w-amt" onclick="withdraw()">Withdraw</button><br>
 		</div>
 
 		<div id="appr">
@@ -736,7 +736,7 @@ function withdraw()
 	catch(e){console.log(e)}
 }
 
-function exit()
+async function exit()
 {
 	try
 	{
