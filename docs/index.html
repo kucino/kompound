@@ -2,11 +2,11 @@
 <html>
 <meta charset="UTF-8">
 <head>
-<meta name="description" content="All Granaries - FTM.guru : Kompound Protocol">
+<meta name="description" content="All Granaries - KCC.guru : Kompound Protocol">
 <meta name="keywords" content="Granary, Finance, Compound, Vault, Interest, Decentralized Finance, defi, yield farming, Guru Network, KCC Opera, FTM">
 <title>All Granaries - FTM.guru</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="https://ftm.guru/img/64.png"/>
+<link rel="shortcut icon" href="img/kucino.svg"/>
 <style>
 *{
 scroll-behavior: smooth !important;
@@ -207,7 +207,7 @@ ul i{font-size:0.85em;}
 
 <br><br>
 Zero* deposit fees & Zero withdrawal fees.
-<br><span style="font-size:0.8em">0.1% Deposit fees, No fees if holding 0.01 ELITE.</span>
+<br><span style="font-size:0.8em">0.1% Deposit fees, No fees if holding 10M KUCINO.</span>
 
 <br><br><br><br><br><br>
 
@@ -228,9 +228,9 @@ Invest any asset to get the most out of it with our tailor-made strategies.
 <br><br>
 <i style="border:1px dashed gold;border-radius:8px"> <input type="checkbox" checked onchange="togcar()"> Hide inactive? </i>
 <br><br><br>
-<details class="cardhide"><summary class="fore"><span class="fn" ><img src="img/kudex.png"></span> Kudex Farms (0/2)</summary><br>
+<details class=""><summary class="fore"><span class="fn" ><img src="img/kudex.png"></span> Kudex Farms (0/2)</summary><br>
 	<div class="cards">
-		<div class="card card2 cardhide" onclick="window.location='3101.html'">
+		<div class="card" onclick="window.location='3101.html'">
 			<span class="cardapr">
 				<span>GRAIN<br>#3101</span>
 				<span class="ki"><img src="img/kcs.svg"><img src="img/bnb.svg"><img class="ib" src="img/kudex.png"></span>
@@ -322,17 +322,17 @@ Invest any asset to get the most out of it with our tailor-made strategies.
 
 </div>
 </body>
-<script src="../web3.min.js"></script>
+<script src="web3.min.js"></script>
 <script>
 window.addEventListener('load',async function()
 {
-	if(window.ethereum&&Number(window.ethereum.chainId)==250){web3 = new Web3(web3.currentProvider);if(!(window.ethereum.selectedAddress==null)){cw()}}
-	else{web3 = new Web3("https://rpc.ftm.tools");}
+	if(window.ethereum&&Number(window.ethereum.chainId)==321){web3 = new Web3(web3.currentProvider);if(!(window.ethereum.selectedAddress==null)){cw()}}
+	else{web3 = new Web3("https://rpc-mainnet.kcc.network");}
 	pantvl()
 }, false);
 function pantvl()
 {
-	pt=new web3.eth.Contract([{"constant": true,"inputs": [],"name": "tvl","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}],"0x3f0458FfB6D106d2F5CdeC9CEdc9054A69275489")
+	pt=new web3.eth.Contract([{"constant": true,"inputs": [],"name": "tvl","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}],"0x426a4a4b73d4cd173c9ab78d18c0d79d1717eaa9")
 	pt.methods.tvl().call((e,r)=>{$("pantvl").innerHTML = "$"+(Number(r)/1e18).toLocaleString()});
 }
 function fornum(n,d)
