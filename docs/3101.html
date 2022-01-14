@@ -363,7 +363,7 @@ window.addEventListener('load',async function()
 }, false);
 function pantvl()
 {
-	pt=new web3.eth.Contract([{"constant": true,"inputs": [],"name": "tvl","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}],"0x3f0458FfB6D106d2F5CdeC9CEdc9054A69275489")
+	pt=new web3.eth.Contract([{"constant": true,"inputs": [],"name": "tvl","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}],"0x426a4a4b73d4cd173c9ab78d18c0d79d1717eaa9")
 	pt.methods.tvl().call((e,r)=>{$("pantvl").innerHTML = "$"+(Number(r)/1e18).toLocaleString()});
 }
 function fornum(n,d)
