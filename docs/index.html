@@ -188,7 +188,11 @@ ul i{font-size:0.85em;}
 <div class="body">
 <br>
 <h1>Kompound Protocol</h1>
-<h3>Compounding Service for KCC's Yield Farms</h3>
+<h3>Compounding Service for Yield Farms on
+<select onchange="switchchain(this.value)">
+<option value="250"> Fantom Opera</option>
+<option value="321" selected> Kucoin C-Chain</option>
+</select></h3>
 <i>Earn 1% of each harvest, just for paying the gas! Earn compound interest even on those rewards!</i><br><br>
 <details><summary><button class="ddb" onclick='window.location="#all"'><span>Get Started</span></button></summary></details>
 <details><summary><button class="ddb"  id="ddb" onclick="dive()"><span>Learn More</span></button></summary>
@@ -223,12 +227,12 @@ Zero* deposit fees & Zero withdrawal fees.
 		</div>
 	-->
 
-<h2 id="all">Available Granaries (1/5)</h2>
+<h2 id="all">Available Granaries (3/6)</h2>
 Invest any asset to get the most out of it with our tailor-made strategies.
 <br><br>
 <i style="border:1px dashed gold;border-radius:8px"> <input type="checkbox" checked onchange="togcar()"> Hide inactive? </i>
 <br><br><br>
-<details open><summary class="fore"><span class="fn" ><img src="img/kudex.png"></span> Kudex Farms (1/2)</summary><br>
+<details open><summary class="fore"><span class="fn" ><img src="img/kudex.png"></span> Kudex Farms (3/3)</summary><br>
 	<div class="cards">
 		<div class="card" onclick="window.location='3101.html'">
 			<span class="cardapr">
@@ -245,6 +249,15 @@ Invest any asset to get the most out of it with our tailor-made strategies.
 				<span class="ki"><img src="img/kcs.svg"><img src="img/usdt.svg"><img class="ib" src="img/kudex.png"></span>
 			</span><br>
 			<span class="bigapr">wKCS-USDT KudexLP</span>
+			<hr>
+			<div class="fn" ><img src="img/kudex.png">Kudex Farms</div>
+		</div>
+		<div class="card" onclick="window.location='3103.html'">
+			<span class="cardapr">
+				<span>GRAIN<br>#3103</span>
+				<span class="ki"><img src="img/kcs.svg"><img src="img/usdc.svg"><img class="ib" src="img/kudex.png"></span>
+			</span><br>
+			<span class="bigapr">wKCS-USDC KudexLP</span>
 			<hr>
 			<div class="fn" ><img src="img/kudex.png">Kudex Farms</div>
 		</div>
@@ -350,6 +363,11 @@ function fornum(n,d)
 }
 function $(_) {return document.getElementById(_);}
 function cw(){}
+function switchchain(v)
+{
+	if(v=="250"){window.location="https://ftm.guru/GRAIN"}
+	if(v=="321"){window.location="https://kcc.guru/kompound"}
+}
 function dive()
 {
 	if($("ddb").parentElement.parentElement.getAttribute("open")==null)
