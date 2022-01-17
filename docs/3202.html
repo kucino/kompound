@@ -370,12 +370,12 @@ function fornum(n,d)
 {
 	_n=(Number(n)/10**Number(d));
 	n_=_n;
-	if(_n>1e18){n_=(_n/1e18).toFixed(2)+"Qt"}
-	else if(_n>1e15){n_=(_n/1e15).toFixed(2)+"Qd"}
-	else if(_n>1e12){n_=(_n/1e12).toFixed(2)+"Tn"}
-	else if(_n>1e9){n_=(_n/1e9).toFixed(2)+"Bn"}
-	else if(_n>1e6){n_=(_n/1e6).toFixed(2)+"Mn"}
-	else if(_n>1e3){n_=(_n/1e3).toFixed(2)+"Th"}
+	if(_n>1e18){n_=(_n/1e18).toFixed(2)+" Qt."}
+	else if(_n>1e15){n_=(_n/1e15).toFixed(2)+" Qd."}
+	else if(_n>1e12){n_=(_n/1e12).toFixed(2)+" Tn."}
+	else if(_n>1e9){n_=(_n/1e9).toFixed(2)+" Bn."}
+	else if(_n>1e6){n_=(_n/1e6).toFixed(2)+" Mn."}
+	else if(_n>1e3){n_=(_n/1e3).toFixed(2)+" Th."}
 	else if(_n>0){n_=(_n/1e0).toFixed(5)+""}
 	return(n_);
 }
@@ -680,7 +680,7 @@ abbrove=[
 		"type": "function"
 	}];
 
-f_1_add = "0x8Ba3e35862473bed941F03397C4ff1D190f59c8C";
+f_1_add = "0x974822c6fd06709709fbf880d29352EF19A7CF88";
 pairadd = "0x943F29A00415D8cE38607aBb81e36cdDfDCAA77f";
 tearned	= "0x4A81704d8C16d9FB0d7f61B747D0B5a272badf14";
 
@@ -834,7 +834,7 @@ async function DrefreshFarm()
 
 		await Promise.all([ts,vl,io]).then(d=>{
 			console.log(d);
-			$("c_ts").innerHTML = (Number(d[0])/1e18).toFixed(10);
+			$("c_ts").innerHTML = fornum(Number(d[0]),18);
 			$("c_mc").innerHTML = "$ "+fornum(Number(d[1]),18);
 			$("c_pu").innerHTML = "$ "+fornum(Number(d[1])/Number(d[0]),0);
 			oi=[];for(i=0;i< (d[2].result.length-2)/64;i++){oi.push(Number("0x"+d[2].result.substr(2+64*i,64)))}
