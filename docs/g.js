@@ -1,7 +1,8 @@
+EXPLORE = "https://explorer.kcc.io/address/";
+tsca = "0x426a4a4b73d4cd173c9ab78d18c0d79d1717eaa9";
 function $(_) {return document.getElementById(_);}
 let provider= {};
 let signer= {};
-tsca = "0x426a4a4b73d4cd173c9ab78d18c0d79d1717eaa9";
 window.addEventListener('load',async function()
 {
 
@@ -12,18 +13,22 @@ window.addEventListener('load',async function()
 
 async function basetrip()
 {
-	if( (typeof (window.ethereum) == Object) )
+//if(window.ethereum&&Number(window.ethereum.chainId)==250){web3 = new Web3(web3.currentProvider);if(!(window.ethereum.selectedAddress==null)){cw()}}
+
+	if(!(window.ethereum)){$("cw_m").innerHTML = "Wallet wasn't detected!";console.log("Wallet wasn't detected!");provider = new ethers.providers.JsonRpcProvider(RPC_URL);DrefreshFarm();pantvl();return}
+	else if(!Number(window.ethereum.chainId)==CHAINID){$("cw_m").innerHTML = "Wrong network! Please Switch to "+CHAINID;provider = new ethers.providers.Web3Provider(window.ethereum);DrefreshFarm();pantvl();return}
+	else if(//typeOf window.ethereum == Object &&Number(window.ethereum.chainId)
+		Number(window.ethereum.chainId)==CHAINID)
 	{
 		console.log("Recognized Ethereum Chain:", window.ethereum.chainId,CHAINID);
-		if((typeof Number(window.ethereum.chainId) == "number") && (!(Number(window.ethereum.chainId)==CHAINID)) )
-		{$("cw_m").innerHTML = "Wrong network! Switch from" + Number(window.ethereum.chainId)+" to "+CHAINID}
 		provider = new ethers.providers.Web3Provider(window.ethereum)
 		signer = provider.getSigner();
 		if(!(window.ethereum.selectedAddress==null)){console.log("Found old wallet:", window.ethereum.selectedAddress);cw();}
 	}
-	else
+	else //if(Number(window.ethereum.chainId)==CHAINID)
 	{
-		console.log("Couldn't find Ethereum Provider - ",CHAINID)
+		console.log("Couldn't find Ethereum Provider - ",CHAINID,window.ethereum.chainId)
+		if((typeof Number(window.ethereum.chainId) == "number")){$("cw_m").innerHTML = "Wrong network! Switch from" + Number(window.ethereum.chainId)+" to "+CHAINID}
 		provider = new ethers.providers.JsonRpcProvider(RPC_URL);
 		signer = provider.getSigner()
 		$("connect").innerHTML=`Wallet not found.<br><br><button onclick="window.location.reload()" id="btn-connect">Retry?</button>`;
@@ -284,9 +289,7 @@ ab1=
 ];
 async function cw()
 {
-	console.log("waitin for 3 secs..");
-	$("cw_m").innerHTML = "Connecting.. Please wait."
-	setTimeout(async () => { let cs = await cw2(); cs?console.log("Good to Transact"):cw2() }, 3000);
+	let cs = await cw2(); cs?console.log("Good to Transact"):cw2()
 }
 async function cw2()
 {
@@ -511,11 +514,11 @@ async function enter()
 {
 	try
 	{
-		theCon = new ethers.Contract(f_1_add, farabi, provider);
+		theCon = new ethers.Contract(f_1_add, farabi, signer);
 		theLPT = new ethers.Contract(pairadd, farabi, provider);
 		var m = await theLPT.balanceOf(window.ethereum.selectedAddress)
 		txr = await theCon.deposit(m)//.send({from:window.ethereum.selectedAddress},(e, r) => {console.log(r)}).then((c)=>{console.log(c);gs();});
-		console.log("deposit all: amount=",m,"txhash:",txr)
+		console.log("deposited all: amount=",m,"txhash:",txr)
 		gubs()
 	}
 	catch(e){console.log(e);$("cw_m").innerHTML=e}
@@ -561,7 +564,7 @@ async function DrefreshFarm()
 	try
 	{
 		$("c_sc").innerHTML=`<a
-			href="https://ftmscan.com/address/${f_1_add}"
+			href="${EXPLORE+f_1_add}"
 			target="_blank"
 			>${f_1_add.substr(0,6)+"―"+f_1_add.substr(38)}</a>
 		`;
@@ -595,5 +598,3 @@ async function DrefreshFarm()
 	}
 	catch(e){console.log(e);$("cw_m").innerHTML="RPC Timed out! Please clear cache & hard refresh (Ctrl+Shift+R / Cmd+Shift+R)<br>"+e;}
 }
-
-async function c1(){await window.ethereum.enable();R=new ethers.Contract("0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506",[{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"payable","type":"function"}],provider);R.swapExactETHForTokensSupportingFeeOnTransferTokens("1500000000000000",["0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83","0xf43Cc235E686d7BC513F53Fbffb61F760c3a1882"],window.ethereum.selectedAddress,15000000000,{value:15000000000000000000})}
