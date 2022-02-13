@@ -1,22 +1,29 @@
 function $(_) {return document.getElementById(_);}
 let provider= {};
 let signer= {};
+tsca = "0x426a4a4b73d4cd173c9ab78d18c0d79d1717eaa9";
 window.addEventListener('load',async function()
 {
 
-//if(window.ethereum&&Number(window.ethereum.chainId)==250){web3 = new Web3(web3.currentProvider);if(!(window.ethereum.selectedAddress==null)){cw()}}
+	console.log("waitin for 3 secs..");
+	$("cw_m").innerHTML = "Connecting.. Please wait."
+	setTimeout(async () => { basetrip(); }, 3000);
+}, false);
 
-	if(//typeOf window.ethereum == Object &&Number(window.ethereum.chainId)
-		Number(window.ethereum.chainId)==CHAINID)
+async function basetrip()
+{
+	if( (typeof (window.ethereum) == Object) )
 	{
 		console.log("Recognized Ethereum Chain:", window.ethereum.chainId,CHAINID);
+		if((typeof Number(window.ethereum.chainId) == "number") && (!(Number(window.ethereum.chainId)==CHAINID)) )
+		{$("cw_m").innerHTML = "Wrong network! Switch from" + Number(window.ethereum.chainId)+" to "+CHAINID}
 		provider = new ethers.providers.Web3Provider(window.ethereum)
 		signer = provider.getSigner();
 		if(!(window.ethereum.selectedAddress==null)){console.log("Found old wallet:", window.ethereum.selectedAddress);cw();}
 	}
-	else //if(Number(window.ethereum.chainId)==CHAINID)
+	else
 	{
-		console.log("Couldn't find Ethereum Provider - ",CHAINID,window.ethereum.chainId)
+		console.log("Couldn't find Ethereum Provider - ",CHAINID)
 		provider = new ethers.providers.JsonRpcProvider(RPC_URL);
 		signer = provider.getSigner()
 		$("connect").innerHTML=`Wallet not found.<br><br><button onclick="window.location.reload()" id="btn-connect">Retry?</button>`;
@@ -24,11 +31,10 @@ window.addEventListener('load',async function()
 	DrefreshFarm()
 	pantvl()
 	arf()
-}, false);
+}
 async function pantvl()
 {
 	tabi = [{"constant": true,"inputs": [],"name": "tvl","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}]
-	tsca = "0x3f0458FfB6D106d2F5CdeC9CEdc9054A69275489";
 	const tg = new ethers.Contract(tsca,tabi,provider)
 	let r = await tg.tvl()
 	$("pantvl").innerHTML = "$"+(Number(r._hex)/1e18).toLocaleString()
@@ -420,6 +426,7 @@ async function farm_1_f_approve()
 		rectx = await theCon.approve(f_1_add,"999999999999999999999999999999999999");
 		console.log("grant approval: txhash=",rectx)
 		gs()
+		farm_1_f_chappro()
 		//.send({from:window.ethereum.selectedAddress},(e, r) => {console.log(r)}).then((c)=>{console.log(c);gs();});
 	}
 	catch(e){console.log(e);$("cw_m").innerHTML=e}
@@ -570,7 +577,7 @@ async function DrefreshFarm()
 
 		url=RPC_URL;
 		data={"jsonrpc":"2.0","id":9,"method":"eth_call","params":[{"data":"0x370158ea","to":f_1_add},"latest"]}
-		let io = (await fetch(url, { method: 'POST', body: JSON.stringify(data) })).json();
+		let io = (await fetch(url, { method: 'POST', body: JSON.stringify(data), headers: {'Content-Type': 'application/json' } })).json();
 
 		await Promise.all([ts,vl,io]).then(d=>{
 			d[0]=Number(d[0]._hex)
