@@ -168,13 +168,31 @@ ul i{font-size:0.85em;}
   right: 0;
 }
 
-.card2{background: #222;color: grey;border:black;cursor:not-allowed !important;}
+.card2{background: #222;color: grey;border:2px solid gray;cursor:not-allowed !important;}
 .cardhide{display:none}
 .card2:hover{transform: none;box-shadow: none}
+.summore{margin: 5px 5% -5px;font-size:0.7em;color: aqua;font-style:italic;display:none}
+.summnum,.summtvl{font-size: 1.1em;color: white;font-weight: bold}
+summary.fore:hover{cursor: cell}
+.sum1num{color: white;font-weight: /*bold*/}
+
+td{font-family:mono;text-align:right;padding:4px 16px;min-width:max-content;font-size:1.25em;}
+td a{color: #fff;text-decoration:underline dotted #1ea;cursor: zoom-in}
+#pfd{font-size: 2.5em;font-weight: bold;}
+thead tr td{font-weight: bold;font-size: 1.2em;text-align: center;text-decoration:underline dotted gold;cursor: alias}
+.toggs{margin: 1%}
+details{font-size: 0.7em}
+td img{height:20px;width: 20px}
+td:first-child, thead tr td{font-family:inherit !important}
+td:nth-last-child(2){display:none}
+td:nth-child(3),td:nth-child(5),td:nth-child(8){text-align: center}
 .topchains img{width:32px;padding:0 4px}
 .topchains:not(.selchain) img{-webkit-filter: grayscale(100%);filter: grayscale(100%);}
 .topchains:hover img{-webkit-filter:none;filter:none;}
 .selchain img{width: 64px}
+@media(min-width:641px){
+  details{font-size: 1rem}
+}
 </style>
 </head>
 <body>
@@ -363,6 +381,48 @@ Invest any asset to get the most out of it with our tailor-made strategies.
 
 
 <br><br><br><br><br><br>
+
+<h2 id="dash">Granary Dashboard</h2>
+Overview of your investments and other performance statistics for all the Granaries.
+<br><br>
+<i class="toggs" style="border:1px dashed gold;border-radius:8px"> <input type="checkbox" onchange=""> Hide Zero-balance? </i>
+<i class="toggs" style="border:1px dashed gold;border-radius:8px"> Sort by:
+	<select onchange="sortit(this.value);sortit(this.value)">
+		<option value="0">Granary</option>
+		<option value="2">R. APR</option>
+		<option value="3">T.V.L.</option>
+		<option value="1" selected>Balance</option>
+	</select>
+</i>
+<br><br><i>Tap the <span style="text-decoration:2px underline dotted gold;cursor: alias">headings</span> to flip direction of sorting.</i>
+<br><br><i>Select the <span style="text-decoration:2px underline dotted #1ea;cursor: zoom-in">GRAIN# ID</span> to visit a Granary.</i>
+
+<br><br><br><br><br><br><br><br>
+<div align="center">
+	<span id="pfd">💰<span id="pf">0.000</span></span>
+	<br>Portfolio Valuation (USD)<br>
+	<button onclick="cw()" id="btn-connect">Connect a Wallet?</button>
+</div>
+<br><br><br><br>
+<div style="overflow:auto;text-align:center">
+	<table align="center">
+		<thead><tr>
+			<td onclick="sortit(0)">GRAIN#
+			<td onclick="sortit(1)">My Position</td>
+			<td onclick="sortit(2)">Buys</td>
+			<td onclick="sortit(3)">Realized APR</td>
+			<td onclick="sortit(4)">Sells</td>
+			<td onclick="sortit(5)">Value Locked</td>
+			<td onclick="sortit(6)">Balance</td>
+			<td onclick="sortit(7)">Uses</td>
+		</tr></thead>
+		<tbody id="mainstage"></tbody>
+	</table>
+</div>
+
+
+
+<br><br><br><br><br><br>
 <hr class="hr1">
 <br><br><br><br>
 <div align="center"><i>Want to see more?<br><br>
@@ -376,7 +436,7 @@ Invest any asset to get the most out of it with our tailor-made strategies.
 <br><br><br><br><br><br>
 <div onclick="pantvl()">
 	<span style="font-size:2.5em;font-weight:bold" id="pantvl" class="fore">$0.000</span><sup style="font-size:1.2em;position:relative;top: -14px;">⟳</sup><br>
-	(Total Value Locked on MTV.guru)
+	(Total Value Locked on KCC.guru)
 </div>
 
 <br><br>
@@ -388,15 +448,15 @@ Invest any asset to get the most out of it with our tailor-made strategies.
 	<a target="_blank" href="https://fmc.guru">MTV.guru</a>
 	<br><br>
 	<a target="_blank" href="https://kcc.guru"><img src="https://ftm.guru/crypto-icons/kcc.png"></a>
-	<a target="_blank" href="https://ftm.guru"><img src="https://ftm.guru/crypto-icons/64.png"></a>
+	<a target="_blank" href="https://mtv.guru"><img src="https://ftm.guru/crypto-icons/mtv.png"></a>
+	<a target="_blank" href="https://projects.fantom.network/project-detail/6125a8b6800c225308858b02"><img src="https://ftm.guru/crypto-icons/ftm.svg"></a>
 	<a target="_blank" href="https://fmc.guru"><img src="https://ftm.guru/crypto-icons/FMC.svg"></a>
-	<a target="_blank" href="https://fmc.guru"><img src="https://ftm.guru/crypto-icons/mtv.png"></a>
+	<a target="_blank" href="https://ftm.guru"><img src="https://ftm.guru/crypto-icons/64.png"></a>
+	<a target="_blank" href="https://kcc.guru/casino"><img src="https://ftm.guru/crypto-icons/kucino.svg"></a>
 	<a target="_blank" href="https://medium.com/@ftm1337"><img src="https://ftm.guru/crypto-icons/medium.svg"></a>
 	<a target="_blank" href="https://www.coingecko.com/coins/elite-1337"><img src="https://ftm.guru/crypto-icons/gecko.svg"></a>
 	<a target="_blank" href="https://coinmarketcap.com/currencies/elite-1337"><img src="https://ftm.guru/crypto-icons/cmc.svg"></a>
-	<a target="_blank" href="https://defillama.com/protocol/ftmguru"><img src="https://ftm.guru/crypto-icons/defillama.svg"></a>
-	<a target="_blank" href="https://defillama.com/protocol/ftmguru"><img src="https://ftm.guru/crypto-icons/nomics.svg"></a>
-	<!--<a target="_blank" href="https://defillama.com/protocol/kccguru"><img src="https://ftm.guru/crypto-icons/defillama.svg"></a>-->
+	<a target="_blank" href="https://defillama.com/protocol/ftmguru"><img src="https://ftm.guru/crypto-icons/defillama.svg"><img class="subimg" src="https://ftm.guru/crypto-icons/64.png"></a><a target="_blank" href="https://defillama.com/protocol/kccguru"><img src="https://ftm.guru/crypto-icons/defillama.svg"><img class="subimg" src="https://ftm.guru/crypto-icons/kucino.svg"></a><a target="_blank" href="https://defillama.com/protocol/ftmguru"><img src="https://ftm.guru/crypto-icons/nomics.svg"></a>
 </div>
 
 <br><br><br><br><br><hr class="hr1">
@@ -405,15 +465,29 @@ Invest any asset to get the most out of it with our tailor-made strategies.
 </body>
 <script src="web3.min.js"></script>
 <script>
-window.addEventListener('load',async function()
-{
-	if(window.ethereum&&Number(window.ethereum.chainId)==321){web3 = new Web3(web3.currentProvider);if(!(window.ethereum.selectedAddress==null)){cw()}}
-	else{web3 = new Web3("https://rpc-mainnet.kcc.network");}
-	pantvl()
-}, false);
+CHAINID = 321
+RPC_URL = "https://rpc-mainnet.kcc.network"
+window.addEventListener(
+	'load',
+	async function()
+	{
+		if(window.ethereum&&Number(window.ethereum.chainId)==CHAINID)
+		{web3 = new Web3(web3.currentProvider);if(!(window.ethereum.selectedAddress==null)){cw()}}
+		else
+		{
+			console.log("didnt find user addr, printing just the apr & tvl")
+			web3 = new Web3(RPC_URL);
+			$("mainstage").innerHTML="";
+			for(i=0;i< grains.length;i++){ggs(grains[i])};
+		}
+		pantvl()
+	},
+	false
+);
+
 function pantvl()
 {
-	pt=new web3.eth.Contract([{"constant": true,"inputs": [],"name": "tvl","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}],"0x426a4a4b73d4cd173c9ab78d18c0d79d1717eaa9")
+	pt=new web3.eth.Contract([{"constant": true,"inputs": [],"name": "tvl","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}],"0xdf486980df72446a5eff76263efb2fa9391be136")
 	pt.methods.tvl().call((e,r)=>{$("pantvl").innerHTML = "$"+(Number(r)/1e18).toLocaleString()});
 }
 function fornum(n,d)
@@ -457,6 +531,137 @@ function togcar()
 	{
 		ac2[i].style.display=ac2[i].style.display=="block"?"none":"block"
 	}
+}
+grains=[
+	["3101",	"0xddca793284b546cce25e03af53c2ac0f949a8b8d",	["bnb.svg","kcs.svg"],	["kud.png"],	["kudex.png"]],
+	["3102",	"0xf5be9634549fead60f7dce272fe9a4b96c3b1926",	["kcs.svg","usdt.svg"],	["kud.png"],	["kudex.png"]],
+	["3103",	"0x727A82566ff09AC80ce9D33651197dDCDaFd5a3D",	["kcs.svg","usdc.svg"],	["kud.png"],	["kudex.png"]],
+	["3201",	"0x5Bb3895D4faC7Ce3AfBb163A9e0a9364aa7AA07d",	["kcs.svg","usdt.svg"],	["kus.png"],	["kuswap.svg"]],
+	["3202",	"0x974822c6fd06709709fbf880d29352EF19A7CF88",	["kcs.svg","usdc.svg"],	["kus.png"],	["kuswap.svg"]],
+	["3203",	"0x2A5C9F52b0211Ed72f776a3692de192Cef8B160F",	["kcs.svg","dai.svg"],	["kus.png"],	["kuswap.svg"]],
+	["3204",	"0x03010C2C9E5eC5779fF744e79A86921d58486085",	["kcs.svg","btc.svg"],	["kus.png"],	["kuswap.svg"]],
+	["3301",	"0x3b143382d267bd0652d67c9f43d48c73476a28f8",	["elk.svg","kcs.svg"],	["elk.svg"],	["elk.svg"]],
+	["3302",	"0x6AeBfc883bb404D32441DD103a8dA7b979901594",	["elk.svg","usdc.svg"],	["elk.svg"],	["elk.svg"]],
+]
+pfv=0
+async function ggs(g)
+{
+	G = new web3.eth.Contract(grabi,g[1]);
+	//let info = G.methods.info().call()
+	url="https://rpc-mainnet.kcc.network";
+	data={"jsonrpc":"2.0","id":9,"method":"eth_call","params":[{"data":"0x370158ea","to":g[1]},"latest"]}
+	let info = fetch(url, { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json'} }).then(r=>r.json()).then(r=>r.result);
+	let gtvl = G.methods.tvl().call()
+	let tsup = G.methods.totalSupply().call()
+	let gugb = 0;
+	let sit = 3;
+	if(!(window.ethereum==undefined||window.ethereum.selectedAddress==null))
+	{
+		gugb = await G.methods.balanceOf(window.ethereum.selectedAddress).call();
+		$("btn-connect").style.display="none";
+		addCSS("td:nth-child(2){display:block}");
+		sit = 1
+	}
+	else {
+		gugb = 0;
+		addCSS("td:nth-child(2){display:none}");
+		sit=5
+	}
+	//let gd = await
+	Promise.all([info,gtvl,tsup,gugb])
+	.then(gd=>{
+		//console.log(gd)
+		gtr = document.createElement("tr");
+		if(gd[1]==0){gd[1]=1}
+		if(gd[2]==0){gd[2]=1}
+		oi=[];
+		if(gd[0]==undefined){oi=[1,1,1]}
+		else{for(i=0;i< (gd[0].length-2)/64;i++){oi.push(Number("0x"+gd[0].substr(2+64*i,64)))}}
+		//console.log("oi:",oi)
+		//console.log(
+		//	"i:",i," - ",g[0],
+		//	"\n$: ",((Number(gd[3])/Number(gd[2]))*Number(gd[1])/1e18).toLocaleString(undefined,{minimumFractionDigits: 4, maximumFractionDigits: 4})
+		//	,"\ngd123: ",gd[1],gd[2],gd[3]
+		//)
+		//console.log(g[0],gd)
+		gtr.innerHTML = `
+			<td><a href="${g[0]}.html" target="_blank">🌾#${g[0]}</a></td>
+			<td>$${((Number(gd[3])/Number(gd[2]))*Number(gd[1])/1e18).toLocaleString(undefined,{minimumFractionDigits: 4, maximumFractionDigits: 4})}</td>
+			<td>${giu(g[2])}</td>
+			<td>${(oi[2]/1e18).toFixed(1)}%</td>
+			<td>${giu(g[3])}</td>
+			<td>$${(Number(gd[1])/1e18).toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+			<td>${fornumstd(Number(gd[3]),18)}🌾</td>
+			<td>${giu(g[4])}</td>
+		`;
+		pfv += ((Number(gd[3])/Number(gd[2]))*Number(gd[1]));
+		$("pf").innerHTML = fornumstd(pfv,18);
+		$("mainstage").append(gtr);
+		sortit(sit);sortit(sit);
+	})
+}
+function giu(ari)
+{
+	rst = ""
+	//console.log("ari is", ari)
+	for(i=0;i< ari.length;i++)
+	{rst+= (`<img src="https://ftm.guru/icons/${ari[i]}">`)}
+	return rst
+}
+function fornumstd(n,d){return Number((Number(n)/10**d).toFixed(2)).toLocaleString()}
+grabi=[{"inputs":[{"internalType":"address","name":"_w","type":"address"},{"internalType":"address","name":"_m","type":"address"},{"internalType":"address","name":"_e","type":"address"},{"internalType":"uint8","name":"_p","type":"uint8"},{"internalType":"address","name":"_R","type":"address"},{"internalType":"address[]","name":"_rA","type":"address[]"},{"internalType":"address[]","name":"_rB","type":"address[]"},{"internalType":"string","name":"_id","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"src","type":"address"},{"indexed":true,"internalType":"address","name":"guy","type":"address"},{"indexed":false,"internalType":"uint256","name":"wad","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Compounded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Staked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"src","type":"address"},{"indexed":true,"internalType":"address","name":"dst","type":"address"},{"indexed":false,"internalType":"uint256","name":"wad","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Withdrawn","type":"event"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Eliteness","outputs":[{"internalType":"address","name":"ELITE","type":"address"},{"internalType":"uint256","name":"ELITES","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allnums","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"guy","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"guy","type":"address"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_mw","type":"uint256"},{"internalType":"uint256","name":"_wi","type":"uint256"},{"internalType":"uint256","name":"_pf","type":"uint256"},{"internalType":"address","name":"_t","type":"address"},{"internalType":"uint256","name":"_df","type":"uint256"}],"name":"config","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"dao","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"declareEmergency","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amt","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"doHardWork","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"earn","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"u","type":"address"}],"name":"eliteness","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"emergency","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amt","type":"uint256"}],"name":"emergencyWithdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"id","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"info","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"mc","outputs":[{"internalType":"contract IMasterchef","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"n","type":"uint256"}],"name":"pullElite","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"elite","type":"address"},{"internalType":"uint256","name":"elites","type":"uint256"}],"name":"pushElite","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"tokenAddress","type":"address"},{"internalType":"uint256","name":"tokens","type":"uint256"}],"name":"rescue","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"revokeEmergency","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"routeA","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"routeB","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"router","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"salvage","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"treasury","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tvl","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"utvl","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"want","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amt","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+function sortit(n) {
+  var t, r, z, i, x, y, v, b, c = 0;
+  t = document.getElementById("mainstage");
+  z = true;
+  b = "a";
+  while (z) {
+    z = false;
+    r = t.rows;
+    for (i = 0; i < (r.length - 1); i++) {
+      v = false;
+      x = (r[i].getElementsByTagName("TD")[n].innerHTML).replaceAll(/,| |\.|\$|%/g,'');
+      if(isFinite(x)){x=Number(x)}else{x=x.toLowerCase()}
+      y = (r[i + 1].getElementsByTagName("TD")[n].innerHTML).replaceAll(/,| |\.|\$|%/g,'');
+      if(isFinite(y)){y=Number(y)}else{y=y.toLowerCase()}
+      if (b == "a") {
+        if ((x) > (y)) {
+          v= true;
+          break;
+        }
+      } else if (b == "d") {
+        if ((x) < (y)) {
+          v = true;
+          break;
+        }
+      }
+    }
+    if (v) {
+      r[i].parentNode.insertBefore(r[i + 1], r[i]);
+      z = true;
+      c ++;
+    } else {
+      if (c == 0 && b == "a") {
+        b = "d";
+        z = true;
+      }
+    }
+  }
+}
+const addCSS = s => document.head.appendChild(document.createElement("style")).innerHTML=s;
+async function cw()
+{
+	if(!(window.ethereum)){console.log("Metamask not detected!");return(0)}
+	if(!(Number(window.ethereum.chainId)==CHAINID)){console.log("Wrong network detected!");return(0)}
+	await window.ethereum.enable();
+	$("btn-connect").innerHTML= (window.ethereum.selectedAddress).substr(0,10) +"..."+(window.ethereum.selectedAddress).substr(34);
+	$("btn-connect").style.display="none";
+	var sheet = document.createElement('style');
+	$("btn-connect").style.display="none";
+	addCSS("td:nth-child(2){display:block}");
+	console.log("found user:",(window.ethereum.selectedAddress), "printing portfolio")
+	$("mainstage").innerHTML = ""
+	for(i=0;i< grains.length;i++){ggs(grains[i])}
 }
 </script>
 </html>
